@@ -1,25 +1,34 @@
 public class Rectangle implements Shapes {
-    private double sideLength1;
-    private double sideLength2;
+    private double width;
+    private double height;
 
-    public Rectangle(double sideLength1, double sideLength2) {
-        this.sideLength1 = sideLength1;
-        this.sideLength2 = sideLength2;
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
     }
 
+    @Override
+    public String toString() {
+        return "Прямоугольник: \nвысота = " + getHeight() + "\nширина = " + getWidth() + "\nплощадь = " + getArea() + "\nпериметр = " + getPerimeter();
+    }
+
+    @Override
     public double getWidth() {
-        return sideLength1;
+        return width;
     }
 
-    public double getHeight(){
-        return sideLength2;
+    @Override
+    public double getHeight() {
+        return height;
     }
 
-    public double getArea(){
-        return sideLength1 * sideLength2;
+    @Override
+    public double getArea() {
+        return width * height;
     }
 
-    public double getPerimeter(){
-        return (sideLength1 * 2) + (sideLength2 * 2);
+    @Override
+    public double getPerimeter() {
+        return (width * 2) + (height * 2);
     }
 }

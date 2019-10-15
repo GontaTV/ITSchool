@@ -15,30 +15,39 @@ public class Triangle implements Shapes {
         this.y3 = y3;
     }
 
-    public double lineABLength() {
+    @Override
+    public String toString() {
+        return "Треугольник: \nвысота = " + getHeight() + "\nширина = " + getWidth() + "\nплощадь = " + getArea() + "\nпериметр = " + getPerimeter();
+    }
+
+    private double lineABLength() {
         return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
     }
 
-    public double lineBCLength() {
+    private double lineBCLength() {
         return Math.sqrt(Math.pow((x2 - x3), 2) + Math.pow((y2 - y3), 2));
     }
 
-    public double lineACLength() {
+    private double lineACLength() {
         return Math.sqrt(Math.pow((x1 - x3), 2) + Math.pow((y1 - y3), 2));
     }
 
+    @Override
     public double getWidth() {
-        return ((x1 > x2) ? ((x1 > x3) ? x1 : x3) : ((x2 > x3) ? x2 : x3)) - ((x1 < x2) ? ((x1 < x3) ? x1 : x3) : ((x2 < x3) ? x2 : x3));
+        return ((x1 > x2) ? (Math.max(x1, x3)) : (Math.max(x2, x3))) - ((x1 < x2) ? (Math.min(x1, x3)) : (Math.min(x2, x3)));
     }
 
+    @Override
     public double getHeight() {
-        return ((x1 > x2) ? ((y1 > y3) ? y1 : y3) : ((y2 > y3) ? y2 : y3)) - ((y1 < y2) ? ((y1 < y3) ? y1 : y3) : ((y2 < y3) ? y2 : y3));
+        return ((x1 > x2) ? (Math.max(y1, y3)) : (Math.max(y2, y3))) - ((y1 < y2) ? (Math.min(y1, y3)) : (Math.min(y2, y3)));
     }
 
+    @Override
     public double getPerimeter() {
         return lineABLength() + lineBCLength() + lineACLength();
     }
 
+    @Override
     public double getArea() {
         return Math.sqrt((getPerimeter() / 2) * ((getPerimeter() / 2) - lineABLength()) * ((getPerimeter() / 2) - lineBCLength()) * ((getPerimeter() / 2) - lineACLength()));
     }

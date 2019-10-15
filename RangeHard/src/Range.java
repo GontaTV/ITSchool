@@ -60,7 +60,7 @@ public class Range {
 
     @Override
     public String toString() {
-        return from + ", " + to;
+        return "[" + from + ", " + to + "]";
     }
 
     public Range[] getDifference(Range range1) {

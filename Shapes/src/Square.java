@@ -5,19 +5,28 @@ public class Square implements Shapes {
         this.sideLength = sideLength;
     }
 
+    @Override
+    public String toString() {
+        return "Квадрат: \nвысота = " + getHeight() + "\nширина = " + getWidth() + "\nплощадь = " + getArea() + "\nпериметр = " + getPerimeter();
+    }
+
+    @Override
     public double getWidth() {
         return sideLength;
     }
 
-    public double getHeight(){
+    @Override
+    public double getHeight() {
         return sideLength;
     }
 
-    public double getArea(){
+    @Override
+    public double getArea() {
         return sideLength * sideLength;
     }
 
-    public double getPerimeter(){
+    @Override
+    public double getPerimeter() {
         return sideLength * 4;
     }
 }

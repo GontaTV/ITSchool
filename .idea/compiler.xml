@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="Shapes" target="" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="GENERATE_NO_WARNINGS" value="true" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ITSchool_(OOP)" options="" />
+      <module name="Range" options="" />
+      <module name="RangeHard" options="" />
+      <module name="Shapes" options="" />
+    </option>
+  </component>
+</project>

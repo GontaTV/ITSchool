@@ -1,3 +1,7 @@
+package Mai;
+
+import Range.Range;
+
 public class RangeMain {
     public static void main(String[] args) {
         Range range1 = new Range(2, 8);
@@ -8,8 +12,6 @@ public class RangeMain {
 
         range1.setTo(10);
         System.out.println(range2.isInside(12));
-
-
         System.out.println(range2.getLength());
     }
 }
