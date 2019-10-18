@@ -4,14 +4,11 @@ import ru.academits.range.gonta.Range;
 
 public class RangeMain {
     public static void main(String[] args) {
-        Range range1 = new Range(2, 8);
+        Range range = new Range(3, 15);
 
-        System.out.println(range1.isInside(5));
+        System.out.println("Длина интервала - " + range.getLength());
+        System.out.println("Принадлежность числа (12) диапазону -  " + range.isInside(10));
+        System.out.println("Принадлежность числа (19) диапазону -  " + range.isInside(19));
 
-        Range range2 = new Range(3, 15);
-
-        range1.setTo(10);
-        System.out.println(range2.isInside(12));
-        System.out.println(range2.getLength());
     }
 }
