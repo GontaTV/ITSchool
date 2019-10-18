@@ -1,4 +1,4 @@
-package Range;
+package ru.academits.range.gonta;
 
 public class Range {
     private double from;

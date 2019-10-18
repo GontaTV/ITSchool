@@ -1,6 +1,6 @@
-package Mai;
+package ru.academits;
 
-import Range.Range;
+import ru.academits.range.gonta.Range;
 
 public class RangeMain {
     public static void main(String[] args) {
