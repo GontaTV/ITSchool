@@ -2,8 +2,6 @@ package ru.academits.shapes.gonta;
 
 import ru.academits.inteface.gonta.Shape;
 
-import java.util.Objects;
-
 public class Triangle implements Shape {
     private double x1;
     private double y1;

@@ -2,8 +2,6 @@ package ru.academits.shapes.gonta;
 
 import ru.academits.inteface.gonta.Shape;
 
-import java.util.Objects;
-
 public class Square implements Shape {
     private double sideLength;
 
@@ -38,7 +36,6 @@ public class Square implements Shape {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Square square = (Square) o;
         return square.sideLength == sideLength;
     }
