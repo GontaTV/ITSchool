@@ -1,32 +1,24 @@
 package ru.academits.shapes.gonta;
 
-import ru.academits.inteface.gonta.Shapes;
+import ru.academits.inteface.gonta.Shape;
 
 import java.util.Objects;
 
-public class Rectangle implements Shapes {
-    private double rectangleWidth;
-    private double rectangleHeight;
+public class Rectangle implements Shape {
+    private double width;
+    private double height;
 
-    public Rectangle(double rectangleWidth, double rectangleHeight) {
-        this.rectangleWidth = rectangleWidth;
-        this.rectangleHeight = rectangleHeight;
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
     }
 
-    public double getRectangleWidth() {
-        return rectangleWidth;
+    public void width(double width) {
+        this.width = width;
     }
 
-    public double getRectangleHeight() {
-        return rectangleHeight;
-    }
-
-    public void setRectangleWidth(double rectangleWidth) {
-        this.rectangleWidth = rectangleWidth;
-    }
-
-    public void setRectangleHeight(double rectangleHeight) {
-        this.rectangleHeight = rectangleHeight;
+    public void height(double height) {
+        this.height = height;
     }
 
     @Override
@@ -40,36 +32,45 @@ public class Rectangle implements Shapes {
         }
 
         Rectangle rectangle = (Rectangle) o;
-        return Double.compare(rectangle.rectangleWidth, rectangleWidth) == 0 && Double.compare(rectangle.rectangleHeight, rectangleHeight) == 0;
+        return rectangle.width == width && rectangle.height == height;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rectangleWidth, rectangleHeight);
+        final int prime = 37;
+        int hash = 1;
+        hash = prime * hash + Double.hashCode(width);
+        hash = prime * hash + Double.hashCode(height);
+        return hash;
     }
 
     @Override
     public String toString() {
-        return "Прямоугольник: \nвысота = " + getHeight() + "\nширина = " + getWidth() + "\nплощадь = " + getArea() + "\nпериметр = " + getPerimeter();
+        return "Прямоугольник:" + System.lineSeparator() +
+                "длина (" + width + "); " + "высота (" + height + ")" + System.lineSeparator() +
+                "высота = " + getHeight() + System.lineSeparator() +
+                "ширина = " + getWidth() + System.lineSeparator() +
+                "площадь = " + getArea() + System.lineSeparator() +
+                "периметр = " + getPerimeter();
     }
 
     @Override
     public double getWidth() {
-        return rectangleWidth;
+        return width;
     }
 
     @Override
     public double getHeight() {
-        return rectangleHeight;
+        return height;
     }
 
     @Override
     public double getArea() {
-        return rectangleWidth * rectangleHeight;
+        return width * height;
     }
 
     @Override
     public double getPerimeter() {
-        return (rectangleWidth * 2) + (rectangleHeight * 2);
+        return (width * 2) + (height * 2);
     }
 }

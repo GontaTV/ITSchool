@@ -1,10 +1,10 @@
 package ru.academits.shapes.gonta;
 
-import ru.academits.inteface.gonta.Shapes;
+import ru.academits.inteface.gonta.Shape;
 
 import java.util.Objects;
 
-public class Circle implements Shapes {
+public class Circle implements Shape {
     private double radius;
 
     public Circle(double radius) {
@@ -30,17 +30,25 @@ public class Circle implements Shapes {
         }
 
         Circle circle = (Circle) o;
-        return Double.compare(circle.radius, radius) == 0;
+        return circle.radius == radius;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(radius);
+        final int prime = 37;
+        int hash = 1;
+        hash = prime * hash + Double.hashCode(radius);
+        return hash;
     }
 
     @Override
     public String toString() {
-        return "Окружность: \nвысота = " + getHeight() + "\nширина = " + getWidth() + "\nплощадь = " + getArea() + "\nдлина окружности = " + getPerimeter();
+        return "Окружность:" + System.lineSeparator() +
+                "радиус (" + radius + ")" + System.lineSeparator() +
+                "высота = " + getHeight() + System.lineSeparator() +
+                "ширина = " + getWidth() + System.lineSeparator() +
+                "площадь = " + getArea() + System.lineSeparator() +
+                "длина окружности = " + getPerimeter();
     }
 
     @Override

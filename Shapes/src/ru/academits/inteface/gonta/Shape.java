@@ -1,6 +1,6 @@
 package ru.academits.inteface.gonta;
 
-public interface Shapes {
+public interface Shape {
     double getWidth();
 
     double getHeight();

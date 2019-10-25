@@ -1,10 +1,10 @@
 package ru.academits.shapes.gonta;
 
-import ru.academits.inteface.gonta.Shapes;
+import ru.academits.inteface.gonta.Shape;
 
 import java.util.Objects;
 
-public class Square implements Shapes {
+public class Square implements Shape {
     private double sideLength;
 
     public Square(double sideLength) {
@@ -21,7 +21,12 @@ public class Square implements Shapes {
 
     @Override
     public String toString() {
-        return "Квадрат: \nвысота = " + getHeight() + "\nширина = " + getWidth() + "\nплощадь = " + getArea() + "\nпериметр = " + getPerimeter();
+        return "Квадрат:" + System.lineSeparator() +
+                "длина стороны (" + sideLength + ")" + System.lineSeparator() +
+                "высота = " + getHeight() + System.lineSeparator() +
+                "ширина = " + getWidth() + getHeight() + System.lineSeparator() +
+                "площадь = " + getArea() + System.lineSeparator() +
+                "периметр = " + getPerimeter();
     }
 
     @Override
@@ -35,12 +40,15 @@ public class Square implements Shapes {
         }
 
         Square square = (Square) o;
-        return Double.compare(square.sideLength, sideLength) == 0;
+        return square.sideLength == sideLength;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sideLength);
+        final int prime = 37;
+        int hash = 1;
+        hash = prime * hash + Double.hashCode(sideLength);
+        return hash;
     }
 
     @Override
