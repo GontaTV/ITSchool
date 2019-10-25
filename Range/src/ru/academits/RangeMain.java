@@ -7,7 +7,7 @@ public class RangeMain {
         Range range = new Range(3, 15);
 
         System.out.println("Длина интервала - " + range.getLength());
-        System.out.println("Принадлежность числа (12) диапазону -  " + range.isInside(10));
+        System.out.println("Принадлежность числа (10) диапазону -  " + range.isInside(10));
         System.out.println("Принадлежность числа (19) диапазону -  " + range.isInside(19));
 
     }
