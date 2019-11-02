@@ -11,11 +11,11 @@ public class Rectangle implements Shape {
         this.height = height;
     }
 
-    public void width(double width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    public void height(double height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 

@@ -10,21 +10,13 @@ public class Triangle implements Shape {
     private double x3;
     private double y3;
 
-    private double lineABLength;
-    private double lineBCLength;
-    private double lineACLength;
-
-    public Triangle(double x1, double x2, double x3, double y1, double y2, double y3) {
+    public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
         this.x3 = x3;
         this.y3 = y3;
-
-        this.lineABLength = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
-        this.lineBCLength = Math.sqrt(Math.pow((x2 - x3), 2) + Math.pow((y2 - y3), 2));
-        this.lineACLength = Math.sqrt(Math.pow((x1 - x3), 2) + Math.pow((y1 - y3), 2));
     }
 
     public double getX1() {
@@ -118,6 +110,19 @@ public class Triangle implements Shape {
                 "периметр = " + getPerimeter();
     }
 
+    private double[] getLineLength() {
+        double[][] array = {{x1, x2, x3}, {y1, y2, y3}};
+        double[] lineLength = new double[3];
+
+        for (int i = 0, j = 1; i <= array.length; i++, j++) {
+            if (j > array.length) {
+                j = 0;
+            }
+            lineLength[i] = Math.sqrt(Math.pow((array[0][i] - array[0][j]), 2) + Math.pow((array[1][i] - array[1][j]), 2));
+        }
+        return lineLength;
+    }
+
     @Override
     public double getWidth() {
         return Math.max(Math.max(x1, x2), x3) - Math.min(Math.min(x1, x2), x3);
@@ -130,12 +135,14 @@ public class Triangle implements Shape {
 
     @Override
     public double getPerimeter() {
-        return lineABLength + lineBCLength + lineACLength;
+        double[] lineLength = getLineLength();
+        return lineLength[0] + lineLength[1] + lineLength[2];
     }
 
     @Override
     public double getArea() {
+        double[] lineLength = getLineLength();
         double perimeterHalf = getPerimeter() / 2;
-        return Math.sqrt(perimeterHalf * (perimeterHalf - lineABLength) * (perimeterHalf - lineBCLength) * (perimeterHalf - lineACLength));
+        return Math.sqrt(perimeterHalf * (perimeterHalf - lineLength[0]) * (perimeterHalf - lineLength[1]) * (perimeterHalf - lineLength[2]));
     }
 }
