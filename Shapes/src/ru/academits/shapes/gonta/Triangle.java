@@ -110,17 +110,9 @@ public class Triangle implements Shape {
                 "периметр = " + getPerimeter();
     }
 
-    private double[] getLineLength() {
-        double[][] array = {{x1, x2, x3}, {y1, y2, y3}};
-        double[] lineLength = new double[3];
+    private static double getLineLength(double x1, double x2, double y1, double y2) {
+        return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
 
-        for (int i = 0, j = 1; i <= array.length; i++, j++) {
-            if (j > array.length) {
-                j = 0;
-            }
-            lineLength[i] = Math.sqrt(Math.pow((array[0][i] - array[0][j]), 2) + Math.pow((array[1][i] - array[1][j]), 2));
-        }
-        return lineLength;
     }
 
     @Override
@@ -135,14 +127,12 @@ public class Triangle implements Shape {
 
     @Override
     public double getPerimeter() {
-        double[] lineLength = getLineLength();
-        return lineLength[0] + lineLength[1] + lineLength[2];
+        return getLineLength(x1, x2, y1, y2) + getLineLength(x2, x3, y2, y3) + getLineLength(x1, x3, y1, y3);
     }
 
     @Override
     public double getArea() {
-        double[] lineLength = getLineLength();
         double perimeterHalf = getPerimeter() / 2;
-        return Math.sqrt(perimeterHalf * (perimeterHalf - lineLength[0]) * (perimeterHalf - lineLength[1]) * (perimeterHalf - lineLength[2]));
+        return Math.sqrt(perimeterHalf * (perimeterHalf - getLineLength(x1, x2, y1, y2)) * (perimeterHalf - getLineLength(x2, x3, y2, y3)) * (perimeterHalf - getLineLength(x1, x3, y1, y3)));
     }
 }
