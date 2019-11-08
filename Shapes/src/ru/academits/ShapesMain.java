@@ -5,8 +5,8 @@ import ru.academits.shapes.gonta.Circle;
 import ru.academits.shapes.gonta.Rectangle;
 import ru.academits.shapes.gonta.Square;
 import ru.academits.shapes.gonta.Triangle;
-import ru.academits.sort_shapes.gonta.SortShapesArea;
-import ru.academits.sort_shapes.gonta.SortShapesPerimeter;
+import ru.academits.sort_shapes.gonta.SortShapesByAreaComparator;
+import ru.academits.sort_shapes.gonta.SortShapesByPerimeterComparator;
 
 import java.util.Arrays;
 
@@ -57,7 +57,7 @@ public class ShapesMain {
                 new Square(7),
                 new Circle(5)};
 
-        Arrays.sort(shapes, new SortShapesArea());
+        Arrays.sort(shapes, new SortShapesByAreaComparator());
 
         System.out.println();
         System.out.println("----------ПЛОЩАДЬ ФИГУР----------");
@@ -69,12 +69,13 @@ public class ShapesMain {
         System.out.println();
         System.out.println("Фигура с максимальной площадью - " + shapes[0]);
         System.out.println();
-        Arrays.sort(shapes, new SortShapesPerimeter());
+        Arrays.sort(shapes, new SortShapesByPerimeterComparator());
         System.out.println("Фигура со вторым по величине периметром - " + shapes[1]);
 
         Shape rectangle1 = new Rectangle(5, 7);
         Shape rectangle2 = new Rectangle(5, 7);
 
         System.out.println(rectangle1.equals(rectangle2));
+        System.out.println(square);
     }
 }

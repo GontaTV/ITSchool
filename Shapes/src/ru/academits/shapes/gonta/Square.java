@@ -19,12 +19,7 @@ public class Square implements Shape {
 
     @Override
     public String toString() {
-        return "Квадрат:" + System.lineSeparator() +
-                "длина стороны (" + sideLength + ")" + System.lineSeparator() +
-                "высота = " + getHeight() + System.lineSeparator() +
-                "ширина = " + getWidth() + getHeight() + System.lineSeparator() +
-                "площадь = " + getArea() + System.lineSeparator() +
-                "периметр = " + getPerimeter();
+        return String.format("Квадрат:%n длина стороны (%f)%n высота = %f;%n ширина = %f;%n площадь = %f;%n периметр = %f", sideLength, getHeight(), getWidth(), getArea(), getPerimeter());
     }
 
     @Override

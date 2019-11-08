@@ -101,18 +101,11 @@ public class Triangle implements Shape {
 
     @Override
     public String toString() {
-        return "Треугольник:" + System.lineSeparator() +
-                "координаты (х1 = " + x1 + "; y1 = " + y1 + "; x2 = " + x2 + "; y2 = " + y2 + "; x3 = " + x3 + "; y3 = " + y3 + ")" +
-                System.lineSeparator() +
-                "высота = " + getHeight() + System.lineSeparator() +
-                "ширина = " + getWidth() + System.lineSeparator() +
-                "площадь = " + getArea() + System.lineSeparator() +
-                "периметр = " + getPerimeter();
+        return String.format("Треугольник:%n координаты (x1 = %f; y1 = %f; x2 = %f; y2 = %f; x3 = %f; y3 = %f);%n высота = %f;%n ширина = %f;%n площадь = %f;%n периметр = %f", x1, y1, x2, y2, x3, y3, getHeight(), getWidth(), getArea(),  + getPerimeter());
     }
 
-    private static double getLineLength(double x1, double x2, double y1, double y2) {
+    private static double getLineLength(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
-
     }
 
     @Override
@@ -127,12 +120,12 @@ public class Triangle implements Shape {
 
     @Override
     public double getPerimeter() {
-        return getLineLength(x1, x2, y1, y2) + getLineLength(x2, x3, y2, y3) + getLineLength(x1, x3, y1, y3);
+        return getLineLength(x1, y1, x2, y2) + getLineLength(x2, y2, x3, y3) + getLineLength(x1, y1, x3, y3);
     }
 
     @Override
     public double getArea() {
         double perimeterHalf = getPerimeter() / 2;
-        return Math.sqrt(perimeterHalf * (perimeterHalf - getLineLength(x1, x2, y1, y2)) * (perimeterHalf - getLineLength(x2, x3, y2, y3)) * (perimeterHalf - getLineLength(x1, x3, y1, y3)));
+        return Math.sqrt(perimeterHalf * (perimeterHalf - getLineLength(x1, y1, x2, y2)) * (perimeterHalf - getLineLength(x2, y2, x3, y3)) * (perimeterHalf - getLineLength(x1, y1, x3, y3)));
     }
 }

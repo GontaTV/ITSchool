@@ -44,12 +44,7 @@ public class Rectangle implements Shape {
 
     @Override
     public String toString() {
-        return "Прямоугольник:" + System.lineSeparator() +
-                "длина (" + width + "); " + "высота (" + height + ")" + System.lineSeparator() +
-                "высота = " + getHeight() + System.lineSeparator() +
-                "ширина = " + getWidth() + System.lineSeparator() +
-                "площадь = " + getArea() + System.lineSeparator() +
-                "периметр = " + getPerimeter();
+        return String.format("\"Прямоугольник:\"%n ширина = %f;%n высота = %f;%n площадь = %f;%n периметр = %f", width, height, getArea(), getPerimeter());
     }
 
     @Override

@@ -41,12 +41,7 @@ public class Circle implements Shape {
 
     @Override
     public String toString() {
-        return "Окружность:" + System.lineSeparator() +
-                "радиус (" + radius + ")" + System.lineSeparator() +
-                "высота = " + getHeight() + System.lineSeparator() +
-                "ширина = " + getWidth() + System.lineSeparator() +
-                "площадь = " + getArea() + System.lineSeparator() +
-                "длина окружности = " + getPerimeter();
+        return String.format("Окружность:%n радиус = %f;%n площадь = %f;%n длина окружности = %f", radius, getArea(), getPerimeter());
     }
 
     @Override
