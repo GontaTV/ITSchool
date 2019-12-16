@@ -5,33 +5,27 @@ import ru.academits.linkedlist.gonta.LinkedList;
 public class ListMain {
     public static void main(String[] args) {
         LinkedList<Integer> num = new LinkedList<>();
-        num.add(1);
-        num.add(2);
-        num.add(3);
-        num.add(4);
+        num.addBegin(1);
+        num.addBegin(2);
+        num.addBegin(3);
+        num.addBegin(4);
 
-        System.out.println(num.delByValue(8));
+       System.out.println(num);
 
-        num.addByIndex(5, 4);
+        System.out.println(num.deleteByValue(8));
 
-        num.print();
+        num.addByIndex(5, 2);
+
         num.setElementByIndex(0, 2);
-        num.print();
-        System.out.println();
-        System.out.println(num.setElementByIndex(33, 3));
-        num.print();
-        System.out.println();
-        System.out.println(num.delElementByIndex(2));
-        num.print();
-        System.out.println();
+        System.out.println(num.setElementByIndex(33,3));
+        System.out.println(num.deleteElementByIndex(4));
 
         num.reverseList();
-        num.print();
-        System.out.println();
+        System.out.println(num);
 
         LinkedList<Integer> number = new LinkedList<>();
-        num.copy(number);
-        number.print();
+
+        System.out.println(num.copy(number));
 
     }
 }

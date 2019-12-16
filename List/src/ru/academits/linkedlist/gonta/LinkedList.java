@@ -2,6 +2,8 @@ package ru.academits.linkedlist.gonta;
 
 import ru.academits.listelement.gonta.ListElement;
 
+import java.util.Objects;
+
 public class LinkedList<T> {
     private ListElement<T> head;
     private int count;
@@ -11,11 +13,15 @@ public class LinkedList<T> {
     }
 
     public T getFirst() {
+        if (head == null) {
+            throw new IndexOutOfBoundsException("список пуст");
+        }
+
         return head.getData();
     }
 
-    public T getElementByIndex(int index) {
-        if (index < 0 || index > getCount() - 1) {
+    private ListElement<T> searchElementByIndex(int index) {
+        if (index < 0 || index >= getCount()) {
             throw new IndexOutOfBoundsException("Index должен равнятся от 0 до " + (getCount() - 1));
         }
 
@@ -24,26 +30,22 @@ public class LinkedList<T> {
         for (int i = 0; i < index; i++) {
             p = p.getNext();
         }
-        return p.getData();
+        return p;
+    }
+
+    public T getElementByIndex(int index) {
+        return searchElementByIndex(index).getData();
     }
 
     public T setElementByIndex(T data, int index) {
-        if (index < 0 || index > getCount() - 1) {
-            throw new IndexOutOfBoundsException("Index должен равнятся от 0 до " + (getCount() - 1));
-        }
-
-        ListElement<T> p = head;
-
-        for (int i = 0; i < index; i++) {
-            p = p.getNext();
-        }
+        ListElement<T> p = searchElementByIndex(index);
         T oldElement = p.getData();
         p.setData(data);
 
         return oldElement;
     }
 
-    public void add(T data) {
+    public void addBegin(T data) {
         ListElement<T> p = new ListElement<>(data);
         p.setNext(head);
         head = p;
@@ -51,66 +53,87 @@ public class LinkedList<T> {
     }
 
     public void addByIndex(T data, int index) {
-        if (index < 0 || index > getCount() - 1) {
-            throw new IndexOutOfBoundsException("Index должен равнятся от 0 до " + (getCount() - 1));
+        if (index < 0 || index > getCount()) {
+            throw new IndexOutOfBoundsException("Index должен равнятся от 0 до " + (getCount()));
         }
 
-        ListElement<T> p = head;
-
         if (index == 0) {
-            add(data);
+            addBegin(data);
         } else {
-            for (int i = 0; i < index - 1; i++) {
-                p = p.getNext();
-            }
-
+            ListElement<T> p = searchElementByIndex(index - 1);
             ListElement<T> q = new ListElement<>(data);
 
-            q.setNext(p.getNext());
-            p.setNext(q);
-            count++;
+            if (index == getCount()) {
+                p.setNext(q);
+                count++;
+            } else {
+                q.setNext(p.getNext());
+                p.setNext(q);
+                count++;
+            }
         }
     }
 
-    public T delElementByIndex(int index) {
-        if (index < 0 || index > getCount() - 1) {
-            throw new IndexOutOfBoundsException("Index должен равнятся от 0 до " + (getCount() - 1));
+    public T deleteElementByIndex(int index) {
+        T deletedElement = searchElementByIndex(index).getData();
+
+        if (getCount() == 1) {
+            head = null;
+            count--;
+        } else if (index == 0) {
+            deleteFirstElement();
+        } else {
+            ListElement<T> p = searchElementByIndex(index - 1);
+            p.setNext(p.getNext().getNext());
+            count--;
         }
-
-        ListElement<T> p = head;
-
-        for (int i = 0; i < index; i++) {
-            p = p.getNext();
-        }
-
-        T deletedElement = p.getNext().getData();
-        p.setNext(p.getNext().getNext());
-        count--;
         return deletedElement;
     }
 
-    public T delFirstElement() {
+    public T deleteFirstElement() {
+        if (getCount() == 0) {
+            throw new IndexOutOfBoundsException("Список пуст");
+        }
+
         ListElement<T> oldElement = head;
         head = head.getNext();
         count--;
         return oldElement.getData();
     }
 
-    public boolean delByValue(T value) {
-        if (value == head.getData()) {
-            delFirstElement();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        } else {
-            for (ListElement<T> p = head, prev = null; p != null; prev = p, p = p.getNext()) {
-                if (p.getData() == value) {
-                    assert prev != null;
-                    prev.setNext(prev.getNext().getNext());
-                    count--;
-                    return true;
-                }
-            }
+        }
+
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
+        LinkedList<?> that = (LinkedList<?>) o;
+        return Objects.equals(head, that.head);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(head);
+    }
+
+    public boolean deleteByValue(T value) {
+        if (value == head.getData()) {
+            deleteFirstElement();
+            return true;
+        }
+        for (ListElement<T> p = head, prev = null; p != null; prev = p, p = p.getNext()) {
+
+            if (p.getData() == value) {
+                assert prev != null;
+                prev.setNext(p.getNext());
+                count--;
+                return true;
+            }
+        }
+        return false;
     }
 
     public void reverseList() {
@@ -127,22 +150,33 @@ public class LinkedList<T> {
         }
     }
 
-    public void print() {
-        ListElement p = head;
-
-        while (p != null) {
-            System.out.print(p.getData() + ", ");
-            p = p.getNext();
-        }
-    }
-
-    public void copy(LinkedList<T> t) {
+    public LinkedList<T> copy(LinkedList<T> t) {
         reverseList();
         ListElement<T> p = head;
 
         while (p != null) {
-            t.add(p.getData());
+            t.addBegin(p.getData());
             p = p.getNext();
         }
+        return t;
+    }
+
+    @Override
+    public String toString() {
+        if (getCount() == 0) {
+            throw new IndexOutOfBoundsException("Список пуст");
+        }
+
+        ListElement p = head;
+        StringBuilder s = new StringBuilder();
+
+        while (p != null) {
+            s.append(p.getData());
+            if (p.getNext() != null) {
+                s.append(", ");
+            }
+            p = p.getNext();
+        }
+        return "List: " + s;
     }
 }
